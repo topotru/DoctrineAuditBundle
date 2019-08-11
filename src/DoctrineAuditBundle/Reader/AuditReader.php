@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping\ClassMetadata;
 use Pagerfanta\Adapter\DoctrineDbalSingleTableAdapter;
 use Pagerfanta\Pagerfanta;
 
-class AuditReader
+class AuditReader implements AuditReaderInterface
 {
     const UPDATE = 'update';
     const ASSOCIATE = 'associate';

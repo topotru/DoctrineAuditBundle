@@ -3,7 +3,7 @@
 namespace DH\DoctrineAuditBundle\Helper;
 
 use DH\DoctrineAuditBundle\AuditConfiguration;
-use DH\DoctrineAuditBundle\AuditManager;
+use DH\DoctrineAuditBundle\AuditManagerInterface;
 use DH\DoctrineAuditBundle\Exception\UpdateException;
 use Doctrine\DBAL\Schema\AbstractSchemaManager;
 use Doctrine\DBAL\Schema\Column;
@@ -14,14 +14,14 @@ use Doctrine\ORM\EntityManager;
 class UpdateHelper
 {
     /**
-     * @var AuditManager
+     * @var AuditManagerInterface
      */
     private $manager;
 
     /**
-     * @param AuditManager $manager
+     * @param AuditManagerInterface $manager
      */
-    public function __construct(AuditManager $manager)
+    public function __construct(AuditManagerInterface $manager)
     {
         $this->manager = $manager;
     }

@@ -2,7 +2,7 @@
 
 namespace DH\DoctrineAuditBundle\EventSubscriber;
 
-use DH\DoctrineAuditBundle\AuditManager;
+use DH\DoctrineAuditBundle\AuditManagerInterface;
 use DH\DoctrineAuditBundle\Helper\UpdateHelper;
 use Doctrine\Common\EventSubscriber;
 use Doctrine\ORM\Mapping\ClassMetadataInfo;
@@ -12,11 +12,11 @@ use Doctrine\ORM\Tools\ToolEvents;
 class CreateSchemaListener implements EventSubscriber
 {
     /**
-     * @var AuditManager
+     * @var AuditManagerInterface
      */
     protected $manager;
 
-    public function __construct(AuditManager $manager)
+    public function __construct(AuditManagerInterface $manager)
     {
         $this->manager = $manager;
     }

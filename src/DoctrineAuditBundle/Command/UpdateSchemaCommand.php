@@ -2,7 +2,7 @@
 
 namespace DH\DoctrineAuditBundle\Command;
 
-use DH\DoctrineAuditBundle\AuditManager;
+use DH\DoctrineAuditBundle\AuditManagerInterface;
 use DH\DoctrineAuditBundle\Exception\UpdateException;
 use DH\DoctrineAuditBundle\Helper\UpdateHelper;
 use Doctrine\DBAL\Connection;
@@ -45,7 +45,7 @@ class UpdateSchemaCommand extends Command implements ContainerAwareInterface
         $io = new SymfonyStyle($input, $output);
 
         /**
-         * @var AuditManager
+         * @var AuditManagerInterface
          */
         $manager = $this->container->get('dh_doctrine_audit.manager');
 

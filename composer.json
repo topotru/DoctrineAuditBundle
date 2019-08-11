@@ -12,6 +12,8 @@
   ],
   "require": {
     "php": ">=7.1",
+    "ext-json": "^1.6",
+    "ext-PDO": "*",
     "symfony/orm-pack": "^1.0",
     "symfony/security-bundle": "^3.4 || ^4.0",
     "pagerfanta/pagerfanta": "^2.1",

@@ -126,7 +126,7 @@ class Comment
     /**
      * Set the value of created_at.
      *
-     * @param ?\DateTime $created_at
+     * @param null|\DateTime $created_at
      *
      * @return Comment
      */
@@ -140,7 +140,7 @@ class Comment
     /**
      * Get the value of created_at.
      *
-     * @return ?\DateTime
+     * @return null|\DateTime
      */
     public function getCreatedAt(): ?\DateTime
     {
@@ -174,7 +174,7 @@ class Comment
     /**
      * Set Post entity (many to one).
      *
-     * @param ?Post $post
+     * @param null|Post $post
      *
      * @return Comment
      */
@@ -188,7 +188,7 @@ class Comment
     /**
      * Get Post entity (many to one).
      *
-     * @return ?Post
+     * @return null|Post
      */
     public function getPost(): ?Post
     {

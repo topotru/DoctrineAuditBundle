@@ -7,7 +7,7 @@ use DH\DoctrineAuditBundle\User\UserInterface;
 use Doctrine\DBAL\Types\Type;
 use Doctrine\ORM\EntityManager;
 
-class AuditHelper
+class AuditHelper implements AuditHelperInterface
 {
     /**
      * @var \DH\DoctrineAuditBundle\AuditConfiguration

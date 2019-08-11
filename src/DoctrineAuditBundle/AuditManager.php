@@ -2,10 +2,10 @@
 
 namespace DH\DoctrineAuditBundle;
 
-use DH\DoctrineAuditBundle\Helper\AuditHelper;
+use DH\DoctrineAuditBundle\Helper\AuditHelperInterface;
 use Doctrine\ORM\EntityManager;
 
-class AuditManager
+class AuditManager implements AuditManagerInterface
 {
     /**
      * @var \DH\DoctrineAuditBundle\AuditConfiguration
@@ -19,11 +19,11 @@ class AuditManager
     private $dissociated = [];  // [$source, $target, $id, $mapping]
 
     /**
-     * @var AuditHelper
+     * @var AuditHelperInterface
      */
     private $helper;
 
-    public function __construct(AuditConfiguration $configuration, AuditHelper $helper)
+    public function __construct(AuditConfiguration $configuration, AuditHelperInterface $helper)
     {
         $this->configuration = $configuration;
         $this->helper = $helper;
@@ -242,9 +242,9 @@ class AuditManager
     /**
      * Set the value of helper.
      *
-     * @param AuditHelper $helper
+     * @param AuditHelperInterface $helper
      */
-    public function setHelper(AuditHelper $helper): void
+    public function setHelper(AuditHelperInterface $helper): void
     {
         $this->helper = $helper;
     }
@@ -252,9 +252,9 @@ class AuditManager
     /**
      * Get the value of helper.
      *
-     * @return AuditHelper
+     * @return AuditHelperInterface
      */
-    public function getHelper(): AuditHelper
+    public function getHelper(): AuditHelperInterface
     {
         return $this->helper;
     }

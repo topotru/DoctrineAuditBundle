@@ -2,12 +2,11 @@
 
 namespace DH\DoctrineAuditBundle\EventSubscriber;
 
-use DH\DoctrineAuditBundle\AuditManager;
+use DH\DoctrineAuditBundle\AuditManagerInterface;
 use DH\DoctrineAuditBundle\DBAL\AuditLogger;
 use Doctrine\Common\EventSubscriber;
 use Doctrine\DBAL\Logging\LoggerChain;
 use Doctrine\DBAL\Logging\SQLLogger;
-use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Event\LifecycleEventArgs;
 use Doctrine\ORM\Event\OnFlushEventArgs;
 use Doctrine\ORM\Events;
@@ -15,7 +14,7 @@ use Doctrine\ORM\Events;
 class AuditSubscriber implements EventSubscriber
 {
     /**
-     * @var AuditManager
+     * @var AuditManagerInterface
      */
     private $manager;
 
@@ -24,7 +23,7 @@ class AuditSubscriber implements EventSubscriber
      */
     private $loggerBackup;
 
-    public function __construct(AuditManager $manager)
+    public function __construct(AuditManagerInterface $manager)
     {
         $this->manager = $manager;
     }
