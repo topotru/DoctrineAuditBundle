@@ -2,7 +2,7 @@
 
 namespace DH\DoctrineAuditBundle\EventSubscriber;
 
-use DH\DoctrineAuditBundle\AuditManagerInterface;
+use DH\DoctrineAuditBundle\Manager\AuditManagerInterface;
 use DH\DoctrineAuditBundle\Helper\UpdateHelper;
 use Doctrine\Common\EventSubscriber;
 use Doctrine\ORM\Mapping\ClassMetadataInfo;

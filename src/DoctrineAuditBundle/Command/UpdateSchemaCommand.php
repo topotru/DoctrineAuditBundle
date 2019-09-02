@@ -2,7 +2,7 @@
 
 namespace DH\DoctrineAuditBundle\Command;
 
-use DH\DoctrineAuditBundle\AuditManagerInterface;
+use DH\DoctrineAuditBundle\Manager\AuditManagerInterface;
 use DH\DoctrineAuditBundle\Exception\UpdateException;
 use DH\DoctrineAuditBundle\Helper\UpdateHelper;
 use Doctrine\DBAL\Connection;

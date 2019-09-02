@@ -3,7 +3,7 @@
 namespace DH\DoctrineAuditBundle\Helper;
 
 use DH\DoctrineAuditBundle\AuditConfiguration;
-use DH\DoctrineAuditBundle\AuditManagerInterface;
+use DH\DoctrineAuditBundle\Manager\AuditManagerInterface;
 use DH\DoctrineAuditBundle\Exception\UpdateException;
 use Doctrine\DBAL\Schema\AbstractSchemaManager;
 use Doctrine\DBAL\Schema\Column;

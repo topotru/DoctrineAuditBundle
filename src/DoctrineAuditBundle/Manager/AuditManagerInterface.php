@@ -6,8 +6,9 @@
  * Time: 13:58
  */
 
-namespace DH\DoctrineAuditBundle;
+namespace DH\DoctrineAuditBundle\Manager;
 
+use DH\DoctrineAuditBundle\AuditConfiguration;
 use DH\DoctrineAuditBundle\Helper\AuditHelperInterface;
 use Doctrine\ORM\EntityManager;
 

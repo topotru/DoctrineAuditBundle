@@ -2,7 +2,7 @@
 
 namespace DH\DoctrineAuditBundle\Reader;
 
-class AuditEntry
+class AuditEntry implements AuditEntityInterface
 {
     /**
      * @var int

@@ -124,7 +124,7 @@ class AuditReader implements AuditReaderInterface
 
         /** @var Statement $statement */
         $statement = $queryBuilder->execute();
-        $statement->setFetchMode(\PDO::FETCH_CLASS, AuditEntry::class);
+        $statement->setFetchMode(\PDO::FETCH_CLASS, AuditEntityInterface::class);
 
         return $statement->fetchAll();
     }
@@ -259,7 +259,7 @@ class AuditReader implements AuditReaderInterface
 
         /** @var Statement $statement */
         $statement = $queryBuilder->execute();
-        $statement->setFetchMode(\PDO::FETCH_CLASS, AuditEntry::class);
+        $statement->setFetchMode(\PDO::FETCH_CLASS, AuditEntityInterface::class);
 
         return $statement->fetchAll();
     }

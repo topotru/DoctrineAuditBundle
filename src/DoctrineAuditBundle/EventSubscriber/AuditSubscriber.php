@@ -2,7 +2,7 @@
 
 namespace DH\DoctrineAuditBundle\EventSubscriber;
 
-use DH\DoctrineAuditBundle\AuditManagerInterface;
+use DH\DoctrineAuditBundle\Manager\AuditManagerInterface;
 use DH\DoctrineAuditBundle\DBAL\AuditLogger;
 use Doctrine\Common\EventSubscriber;
 use Doctrine\DBAL\Logging\LoggerChain;

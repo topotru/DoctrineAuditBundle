@@ -1,7 +1,8 @@
 <?php
 
-namespace DH\DoctrineAuditBundle;
+namespace DH\DoctrineAuditBundle\Manager;
 
+use DH\DoctrineAuditBundle\AuditConfiguration;
 use DH\DoctrineAuditBundle\Helper\AuditHelperInterface;
 use Doctrine\ORM\EntityManager;
 
@@ -76,6 +77,7 @@ class AuditManager implements AuditManagerInterface
         if (!$diff) {
             return; // if there is no entity diff, do not log it
         }
+
         $meta = $em->getClassMetadata(\get_class($entity));
         $this->audit($em, [
             'action' => 'update',
