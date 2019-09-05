@@ -1,5 +1,5 @@
 {
-  "name": "mermash/doctrine-audit-bundle",
+  "name": "damienharper/doctrine-audit-bundle",
   "type": "symfony-bundle",
   "description": "This bundle creates audit logs for all doctrine ORM database related changes.",
   "keywords": ["doctrine", "audit"],
