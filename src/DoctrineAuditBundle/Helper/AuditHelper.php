@@ -311,14 +311,6 @@ class AuditHelper implements AuditHelperInterface
                     'notnull' => true,
                 ],
             ],
-            'context' => [
-                'type' => Type::STRING,
-                'options' => [
-                    'default' => null,
-                    'notnull' => false,
-                    'length' => 36,
-                ],
-            ],
         ];
 
         return $columns;
@@ -345,10 +337,6 @@ class AuditHelper implements AuditHelperInterface
             'created_at' => [
                 'type' => 'index',
                 'name' => 'created_at_'.md5($tablename).'_idx',
-            ],
-            'context' => [
-                'type' => 'index',
-                'name' => 'context_'.md5($tablename).'_idx',
             ],
         ];
 
