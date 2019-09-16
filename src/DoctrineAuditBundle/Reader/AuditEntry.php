@@ -54,6 +54,11 @@ class AuditEntry implements AuditEntityInterface
      */
     protected $created_at;
 
+    /**
+     * @var string
+     */
+    protected $context;
+
     public function __set($name, $value)
     {
         $this->{$name} = $value;
@@ -153,5 +158,15 @@ class AuditEntry implements AuditEntityInterface
     public function getDiffs(): ?array
     {
         return json_decode($this->diffs, true);
+    }
+
+    /**
+     * Get the value of context
+     *
+     * @return string
+     */
+    public function getContext(): string
+    {
+        return $this->context;
     }
 }

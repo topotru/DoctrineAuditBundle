@@ -24,6 +24,7 @@ class AuditEntryTest extends TestCase
         $entry->blame_user_firewall = 'main';
         $entry->ip = '1.2.3.4';
         $entry->created_at = 'now';
+        $entry->context = '';
 
         $this->assertSame(1, $entry->getId(), 'AuditEntry::getId() is ok.');
         $this->assertSame('type', $entry->getType(), 'AuditEntry::getType() is ok.');
@@ -35,6 +36,7 @@ class AuditEntryTest extends TestCase
         $this->assertSame('main', $entry->getUserFirewall(), 'AuditEntry::getUserFirewall() is ok.');
         $this->assertSame('1.2.3.4', $entry->getIp(), 'AuditEntry::getIp() is ok.');
         $this->assertSame('now', $entry->getCreatedAt(), 'AuditEntry::getCreatedAt() is ok.');
+        $this->assertSame('', $entry->getContext(), 'AuditEntry::getContext() is ok.');
     }
 
     public function testUndefinedUser(): void

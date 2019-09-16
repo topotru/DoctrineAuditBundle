@@ -217,6 +217,7 @@ class AuditManager implements AuditManagerInterface
             'blame_user_firewall' => ':blame_user_firewall',
             'ip' => ':ip',
             'created_at' => ':created_at',
+            'context' => ':context',
         ];
 
         $query = sprintf(
@@ -238,6 +239,7 @@ class AuditManager implements AuditManagerInterface
         $statement->bindValue('blame_user_firewall', $data['blame']['user_firewall']);
         $statement->bindValue('ip', $data['blame']['client_ip']);
         $statement->bindValue('created_at', $dt->format('Y-m-d H:i:s'));
+        $statement->bindValue('context', '');
         $statement->execute();
     }
 
