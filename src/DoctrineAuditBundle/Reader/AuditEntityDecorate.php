@@ -13,7 +13,7 @@ class AuditEntityDecorate extends AuditEntry
     /**
      * @var string
      */
-    protected $uri;
+    protected $requestUri;
 
     /**
      * @var string
@@ -23,9 +23,9 @@ class AuditEntityDecorate extends AuditEntry
     /**
      * @return string
      */
-    public function getUri(): string
+    public function getRequestUri(): string
     {
-        return $this->uri;
+        return $this->requestUri;
     }
 
     /**
