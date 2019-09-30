@@ -8,12 +8,12 @@
 
 namespace DH\DoctrineAuditBundle\Helper;
 
-use DH\DoctrineAuditBundle\AuditConfiguration;
+use DH\DoctrineAuditBundle\Configuration\AuditConfigurationInterface;
 use Doctrine\ORM\EntityManager;
 
 interface AuditHelperInterface
 {
-    public function getConfiguration(): AuditConfiguration;
+    public function getConfiguration(): AuditConfigurationInterface;
 
     public function id(EntityManager $em, $entity);
 

@@ -2,7 +2,7 @@
 
 namespace DH\DoctrineAuditBundle\Helper;
 
-use DH\DoctrineAuditBundle\AuditConfiguration;
+use DH\DoctrineAuditBundle\Configuration\AuditConfigurationInterface;
 use DH\DoctrineAuditBundle\User\UserInterface;
 use Doctrine\DBAL\Types\Type;
 use Doctrine\ORM\EntityManager;
@@ -10,22 +10,22 @@ use Doctrine\ORM\EntityManager;
 class AuditHelper implements AuditHelperInterface
 {
     /**
-     * @var \DH\DoctrineAuditBundle\AuditConfiguration
+     * @var AuditConfigurationInterface
      */
     private $configuration;
 
     /**
-     * @param AuditConfiguration $configuration
+     * @param AuditConfigurationInterface $configuration
      */
-    public function __construct(AuditConfiguration $configuration)
+    public function __construct(AuditConfigurationInterface $configuration)
     {
         $this->configuration = $configuration;
     }
 
     /**
-     * @return \DH\DoctrineAuditBundle\AuditConfiguration
+     * @return AuditConfigurationInterface
      */
-    public function getConfiguration(): AuditConfiguration
+    public function getConfiguration(): AuditConfigurationInterface
     {
         return $this->configuration;
     }
@@ -170,11 +170,13 @@ class AuditHelper implements AuditHelperInterface
         $client_ip = null;
         $user_fqdn = null;
         $user_firewall = null;
+        $requestUri = null;
 
         $request = $this->configuration->getRequestStack()->getCurrentRequest();
         if (null !== $request) {
             $client_ip = $request->getClientIp();
             $user_firewall = null === $this->configuration->getFirewallMap()->getFirewallConfig($request) ? null : $this->configuration->getFirewallMap()->getFirewallConfig($request)->getName();
+            $requestUri = $request->getRequestUri();
         }
 
         $user = $this->configuration->getUserProvider()->getUser();
@@ -190,6 +192,7 @@ class AuditHelper implements AuditHelperInterface
             'client_ip' => $client_ip,
             'user_fqdn' => $user_fqdn,
             'user_firewall' => $user_firewall,
+            'request_uri' => $requestUri,
         ];
     }
 

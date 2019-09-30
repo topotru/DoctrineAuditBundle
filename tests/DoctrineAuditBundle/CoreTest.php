@@ -2,7 +2,7 @@
 
 namespace DH\DoctrineAuditBundle\Tests;
 
-use DH\DoctrineAuditBundle\AuditConfiguration;
+use DH\DoctrineAuditBundle\Configuration\AuditConfigurationInterface;
 use DH\DoctrineAuditBundle\Tests\Fixtures\Core\Author;
 use DH\DoctrineAuditBundle\Tests\Fixtures\Core\Bike;
 use DH\DoctrineAuditBundle\Tests\Fixtures\Core\Car;
@@ -226,7 +226,7 @@ abstract class CoreTest extends BaseTest
         $em->flush();
     }
 
-    protected function createAuditConfiguration(array $options = []): AuditConfiguration
+    protected function createAuditConfiguration(array $options = []): AuditConfigurationInterface
     {
         $container = new ContainerBuilder();
         $security = new Security($container);

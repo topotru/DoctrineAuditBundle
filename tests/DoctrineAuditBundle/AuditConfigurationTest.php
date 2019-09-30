@@ -2,7 +2,7 @@
 
 namespace DH\DoctrineAuditBundle\Tests;
 
-use DH\DoctrineAuditBundle\AuditConfiguration;
+use DH\DoctrineAuditBundle\Configuration\AuditConfigurationInterface;
 use DH\DoctrineAuditBundle\Tests\Fixtures\Core\Comment;
 use DH\DoctrineAuditBundle\Tests\Fixtures\Core\Post;
 use DH\DoctrineAuditBundle\User\TokenStorageUserProvider;
@@ -13,7 +13,7 @@ use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Security\Core\Security;
 
 /**
- * @covers \DH\DoctrineAuditBundle\AuditConfiguration
+ * @covers \DH\DoctrineAuditBundle\Configuration\AuditConfiguration
  * @covers \DH\DoctrineAuditBundle\Helper\DoctrineHelper
  * @covers \DH\DoctrineAuditBundle\User\TokenStorageUserProvider
  */
@@ -99,7 +99,7 @@ class AuditConfigurationTest extends TestCase
             'entities' => $entities,
         ]);
 
-        $this->assertSame($entities, $configuration->getEntities(), 'AuditConfiguration::getEntities() returns configured entities list.');
+        $this->assertSame($entities, $configuration->getEntities(), 'AuditConfigurationInterface::getEntities() returns configured entities list.');
     }
 
     public function testGetUserProvider(): void
@@ -363,7 +363,7 @@ class AuditConfigurationTest extends TestCase
         $this->assertFalse($configuration->isAudited(Post::class), 'entity "'.Post::class.'" is not audited.');
     }
 
-    protected function getAuditConfiguration(array $options = []): AuditConfiguration
+    protected function getAuditConfiguration(array $options = []): AuditConfigurationInterface
     {
         $container = new ContainerBuilder();
 

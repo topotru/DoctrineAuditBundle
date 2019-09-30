@@ -2,7 +2,7 @@
 
 namespace DH\DoctrineAuditBundle\Helper;
 
-use DH\DoctrineAuditBundle\AuditConfiguration;
+use DH\DoctrineAuditBundle\Configuration\AuditConfigurationInterface;
 use DH\DoctrineAuditBundle\Manager\AuditManagerInterface;
 use DH\DoctrineAuditBundle\Exception\UpdateException;
 use Doctrine\DBAL\Schema\AbstractSchemaManager;
@@ -27,9 +27,9 @@ class UpdateHelper
     }
 
     /**
-     * @return \DH\DoctrineAuditBundle\AuditConfiguration
+     * @return AuditConfigurationInterface
      */
-    public function getConfiguration(): AuditConfiguration
+    public function getConfiguration(): AuditConfigurationInterface
     {
         return $this->manager->getConfiguration();
     }

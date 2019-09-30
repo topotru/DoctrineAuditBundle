@@ -2,7 +2,7 @@
 
 namespace DH\DoctrineAuditBundle\Reader;
 
-use DH\DoctrineAuditBundle\AuditConfiguration;
+use DH\DoctrineAuditBundle\Configuration\AuditConfigurationInterface;
 use Doctrine\DBAL\Query\QueryBuilder;
 use Doctrine\DBAL\Statement;
 use Doctrine\ORM\EntityManagerInterface;
@@ -21,7 +21,7 @@ class AuditReader implements AuditReaderInterface
     const PAGE_SIZE = 50;
 
     /**
-     * @var AuditConfiguration
+     * @var AuditConfigurationInterface
      */
     private $configuration;
 
@@ -38,19 +38,19 @@ class AuditReader implements AuditReaderInterface
     /**
      * AuditReader constructor.
      *
-     * @param AuditConfiguration     $configuration
+     * @param AuditConfigurationInterface     $configuration
      * @param EntityManagerInterface $entityManager
      */
-    public function __construct(AuditConfiguration $configuration, EntityManagerInterface $entityManager)
+    public function __construct(AuditConfigurationInterface $configuration, EntityManagerInterface $entityManager)
     {
         $this->configuration = $configuration;
         $this->entityManager = $entityManager;
     }
 
     /**
-     * @return AuditConfiguration
+     * @return AuditConfigurationInterface
      */
-    public function getConfiguration(): AuditConfiguration
+    public function getConfiguration(): AuditConfigurationInterface
     {
         return $this->configuration;
     }

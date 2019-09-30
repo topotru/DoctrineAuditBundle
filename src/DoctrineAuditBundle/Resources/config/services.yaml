@@ -5,17 +5,26 @@ services:
     public: true
 
   dh_doctrine_audit.configuration:
-    class: DH\DoctrineAuditBundle\AuditConfiguration
+    class: DH\DoctrineAuditBundle\Configuration\AuditConfiguration
     arguments: ["%dh_doctrine_audit.configuration%", "@dh_doctrine_audit.user_provider", "@request_stack", "@security.firewall.map"]
     public: true
 
-  DH\DoctrineAuditBundle\AuditConfiguration:
+  DH\DoctrineAuditBundle\Configuration\AuditConfiguration:
     alias: dh_doctrine_audit.configuration
+    public: true
+
+  dh_doctrine_audit.configuration.decorate:
+    class: DH\DoctrineAuditBundle\Configuration\AuditConfigurationDecorate
+    arguments: ["%dh_doctrine_audit.configuration%", "@dh_doctrine_audit.user_provider", "@request_stack", "@security.firewall.map"]
+    public: true
+
+  DH\DoctrineAuditBundle\Configuration\AuditConfigurationDecorate:
+    alias: dh_doctrine_audit.configuration.decorate
     public: true
 
   dh_doctrine_audit.reader:
     class: DH\DoctrineAuditBundle\Reader\AuditReader
-    arguments: ["@dh_doctrine_audit.configuration", "@doctrine.orm.default_entity_manager"]
+    arguments: ["@dh_doctrine_audit.configuration.decorate", "@doctrine.orm.default_entity_manager"]
     public: true
 
   DH\DoctrineAuditBundle\Reader\AuditReader:
@@ -24,11 +33,20 @@ services:
 
   dh_doctrine_audit.manager:
     class: DH\DoctrineAuditBundle\Manager\AuditManager
-    arguments: ["@dh_doctrine_audit.configuration", "@dh_doctrine_audit.helper"]
+    arguments: ["@dh_doctrine_audit.configuration.decorate", "@dh_doctrine_audit.helper"]
     public: true
 
   DH\DoctrineAuditBundle\Manager\AuditManager:
     alias: dh_doctrine_audit.manager
+    public: true
+
+  dh_doctrine_audit.manager.decorate:
+    class: DH\DoctrineAuditBundle\Manager\AuditManagerDecorate
+    arguments: ["@dh_doctrine_audit.configuration.decorate", "@dh_doctrine_audit.helper.decorate"]
+    public: true
+
+  DH\DoctrineAuditBundle\Manager\AuditManagerDecorate:
+    alias: dh_doctrine_audit.manager.decorate
     public: true
 
   dh_doctrine_audit.helper:
@@ -40,15 +58,24 @@ services:
     alias: dh_doctrine_audit.helper
     public: true
 
+  dh_doctrine_audit.helper.decorate:
+    class: DH\DoctrineAuditBundle\Helper\AuditHelperDecorate
+    arguments: ["@dh_doctrine_audit.configuration.decorate"]
+    public: true
+
+  DH\DoctrineAuditBundle\Helper\AuditHelperDecorate:
+    alias: dh_doctrine_audit.helper.decorate
+    public: true
+
   dh_doctrine_audit.event_subscriber.audit:
     class: DH\DoctrineAuditBundle\EventSubscriber\AuditSubscriber
-    arguments: ["@dh_doctrine_audit.manager"]
+    arguments: ["@dh_doctrine_audit.manager.decorate"]
     tags:
       - { name: doctrine.event_subscriber, connection: default }
 
   dh_doctrine_audit.event_subscriber.create_schema:
     class: DH\DoctrineAuditBundle\EventSubscriber\CreateSchemaListener
-    arguments: ["@dh_doctrine_audit.manager"]
+    arguments: ["@dh_doctrine_audit.manager.decorate"]
     tags:
       - { name: doctrine.event_subscriber, connection: default }
 

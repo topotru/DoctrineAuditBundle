@@ -2,8 +2,8 @@
 
 namespace DH\DoctrineAuditBundle\Tests\DependencyInjection;
 
-use DH\DoctrineAuditBundle\AuditConfiguration;
 use DH\DoctrineAuditBundle\Command\CleanAuditLogsCommand;
+use DH\DoctrineAuditBundle\Configuration\AuditConfigurationInterface;
 use DH\DoctrineAuditBundle\DependencyInjection\DHDoctrineAuditExtension;
 use DH\DoctrineAuditBundle\EventSubscriber\AuditSubscriber;
 use DH\DoctrineAuditBundle\EventSubscriber\CreateSchemaListener;
@@ -26,7 +26,7 @@ class DHDoctrineAuditExtensionTest extends AbstractExtensionTestCase
         $this->assertContainerBuilderHasService('dh_doctrine_audit.user_provider', TokenStorageUserProvider::class);
         $this->assertContainerBuilderHasServiceDefinitionWithArgument('dh_doctrine_audit.user_provider', 0, 'security.helper');
 
-        $this->assertContainerBuilderHasService('dh_doctrine_audit.configuration', AuditConfiguration::class);
+        $this->assertContainerBuilderHasService('dh_doctrine_audit.configuration', AuditConfigurationInterface::class);
         $this->assertContainerBuilderHasServiceDefinitionWithArgument('dh_doctrine_audit.configuration', 1, 'dh_doctrine_audit.user_provider');
         $this->assertContainerBuilderHasServiceDefinitionWithArgument('dh_doctrine_audit.configuration', 2, 'request_stack');
 
@@ -57,7 +57,7 @@ class DHDoctrineAuditExtensionTest extends AbstractExtensionTestCase
     {
         $this->load([]);
 
-        $this->assertContainerBuilderHasAlias(AuditConfiguration::class, 'dh_doctrine_audit.configuration');
+        $this->assertContainerBuilderHasAlias(AuditConfigurationInterface::class, 'dh_doctrine_audit.configuration');
         $this->assertContainerBuilderHasAlias(AuditReader::class, 'dh_doctrine_audit.reader');
         $this->assertContainerBuilderHasAlias(CleanAuditLogsCommand::class, 'dh_doctrine_audit.command.clean');
     }

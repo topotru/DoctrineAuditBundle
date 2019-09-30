@@ -1,13 +1,14 @@
 <?php
 
-namespace DH\DoctrineAuditBundle;
+namespace DH\DoctrineAuditBundle\Configuration;
 
 use DH\DoctrineAuditBundle\Helper\DoctrineHelper;
 use DH\DoctrineAuditBundle\User\UserProviderInterface;
 use Symfony\Bundle\SecurityBundle\Security\FirewallMap;
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\HttpFoundation\RequestStack;
 
-class AuditConfiguration
+class AuditConfiguration implements AuditConfigurationInterface
 {
     /**
      * @var string
@@ -82,7 +83,7 @@ class AuditConfiguration
      *
      * @return $this
      */
-    public function enable(): self
+    public function enable(): AuditConfigurationInterface
     {
         $this->enabled = true;
 
@@ -94,7 +95,7 @@ class AuditConfiguration
      *
      * @return $this
      */
-    public function disable(): self
+    public function disable(): AuditConfigurationInterface
     {
         $this->enabled = false;
 
@@ -253,7 +254,7 @@ class AuditConfiguration
      *
      * @return $this
      */
-    public function enableAuditFor(string $entity): self
+    public function enableAuditFor(string $entity): AuditConfigurationInterface
     {
         if (isset($this->entities[$entity])) {
             $this->entities[$entity]['enabled'] = true;
@@ -269,7 +270,7 @@ class AuditConfiguration
      *
      * @return $this
      */
-    public function disableAuditFor(string $entity): self
+    public function disableAuditFor(string $entity): AuditConfigurationInterface
     {
         if (isset($this->entities[$entity])) {
             $this->entities[$entity]['enabled'] = false;
@@ -306,5 +307,10 @@ class AuditConfiguration
     public function getFirewallMap(): FirewallMap
     {
         return $this->firewallMap;
+    }
+
+    public function getCommand(): Command
+    {
+        // TODO: Implement getCommand() method.
     }
 }
