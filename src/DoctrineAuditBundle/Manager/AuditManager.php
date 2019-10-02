@@ -4,6 +4,7 @@ namespace DH\DoctrineAuditBundle\Manager;
 
 use DH\DoctrineAuditBundle\AuditConfiguration;
 use DH\DoctrineAuditBundle\Helper\AuditHelperInterface;
+use DH\DoctrineAuditBundle\Manager\Context\AuditContextServiceInterface;
 use Doctrine\ORM\EntityManager;
 
 class AuditManager implements AuditManagerInterface
@@ -24,10 +25,16 @@ class AuditManager implements AuditManagerInterface
      */
     private $helper;
 
-    public function __construct(AuditConfiguration $configuration, AuditHelperInterface $helper)
+    /**
+     * @var AuditContextServiceInterface
+     */
+    private $contextService;
+
+    public function __construct(AuditConfiguration $configuration, AuditHelperInterface $helper, AuditContextServiceInterface $contextService)
     {
         $this->configuration = $configuration;
         $this->helper = $helper;
+        $this->contextService = $contextService;
     }
 
     /**
@@ -239,7 +246,7 @@ class AuditManager implements AuditManagerInterface
         $statement->bindValue('blame_user_firewall', $data['blame']['user_firewall']);
         $statement->bindValue('ip', $data['blame']['client_ip']);
         $statement->bindValue('created_at', $dt->format('Y-m-d H:i:s'));
-        $statement->bindValue('context', '');
+        $statement->bindValue('context', $this->contextService->getCurrentContext());
         $statement->execute();
     }
 
