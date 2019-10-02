@@ -240,6 +240,10 @@ class UpdateHelperTest extends BaseTest
                 'type' => 'index',
                 'name' => 'created_at_'.md5($tablename).'_idx',
             ],
+            'context' => [
+                'type' => 'index',
+                'name' => 'context_'.md5($tablename).'_idx',
+            ],
         ];
 
         $helper = $this->createMock(AuditHelper::class);
