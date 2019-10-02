@@ -8,7 +8,7 @@
 
 namespace DH\DoctrineAuditBundle\Manager;
 
-use DH\DoctrineAuditBundle\Configuration\AuditConfigurationInterface;
+use DH\DoctrineAuditBundle\AuditConfiguration;
 use DH\DoctrineAuditBundle\Helper\AuditHelperInterface;
 use Doctrine\ORM\EntityManager;
 
@@ -64,7 +64,7 @@ class AuditManagerDecorator implements AuditManagerInterface
         $this->wrapper->dissociate($em, $source, $target, $mapping);
     }
 
-    public function getConfiguration(): AuditConfigurationInterface
+    public function getConfiguration(): AuditConfiguration
     {
         return $this->wrapper->getConfiguration();
     }

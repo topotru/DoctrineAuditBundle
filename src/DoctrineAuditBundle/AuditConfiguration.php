@@ -1,14 +1,13 @@
 <?php
 
-namespace DH\DoctrineAuditBundle\Configuration;
+namespace DH\DoctrineAuditBundle;
 
 use DH\DoctrineAuditBundle\Helper\DoctrineHelper;
 use DH\DoctrineAuditBundle\User\UserProviderInterface;
 use Symfony\Bundle\SecurityBundle\Security\FirewallMap;
-use Symfony\Component\Console\Command\Command;
 use Symfony\Component\HttpFoundation\RequestStack;
 
-class AuditConfiguration implements AuditConfigurationInterface
+class AuditConfiguration
 {
     /**
      * @var string
@@ -83,7 +82,7 @@ class AuditConfiguration implements AuditConfigurationInterface
      *
      * @return $this
      */
-    public function enable(): AuditConfigurationInterface
+    public function enable(): self
     {
         $this->enabled = true;
 
@@ -95,7 +94,7 @@ class AuditConfiguration implements AuditConfigurationInterface
      *
      * @return $this
      */
-    public function disable(): AuditConfigurationInterface
+    public function disable(): self
     {
         $this->enabled = false;
 
@@ -254,7 +253,7 @@ class AuditConfiguration implements AuditConfigurationInterface
      *
      * @return $this
      */
-    public function enableAuditFor(string $entity): AuditConfigurationInterface
+    public function enableAuditFor(string $entity): self
     {
         if (isset($this->entities[$entity])) {
             $this->entities[$entity]['enabled'] = true;
@@ -270,7 +269,7 @@ class AuditConfiguration implements AuditConfigurationInterface
      *
      * @return $this
      */
-    public function disableAuditFor(string $entity): AuditConfigurationInterface
+    public function disableAuditFor(string $entity): self
     {
         if (isset($this->entities[$entity])) {
             $this->entities[$entity]['enabled'] = false;
@@ -307,10 +306,5 @@ class AuditConfiguration implements AuditConfigurationInterface
     public function getFirewallMap(): FirewallMap
     {
         return $this->firewallMap;
-    }
-
-    public function getCommand(): Command
-    {
-        // TODO: Implement getCommand() method.
     }
 }

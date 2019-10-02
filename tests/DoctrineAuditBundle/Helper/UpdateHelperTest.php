@@ -2,6 +2,7 @@
 
 namespace DH\DoctrineAuditBundle\Tests\Helper;
 
+use DH\DoctrineAuditBundle\AuditConfiguration;
 use DH\DoctrineAuditBundle\Manager\AuditManager;
 use DH\DoctrineAuditBundle\Helper\AuditHelper;
 use DH\DoctrineAuditBundle\Helper\UpdateHelper;
@@ -15,7 +16,7 @@ use Doctrine\ORM\Proxy\ProxyFactory;
 use Gedmo;
 
 /**
- * @covers \DH\DoctrineAuditBundle\Configuration\AuditConfigurationInterface
+ * @covers \DH\DoctrineAuditBundle\AuditConfiguration
  * @covers \DH\DoctrineAuditBundle\Manager\AuditManager
  * @covers \DH\DoctrineAuditBundle\DBAL\AuditLogger
  * @covers \DH\DoctrineAuditBundle\EventSubscriber\AuditSubscriber

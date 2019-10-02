@@ -2,7 +2,7 @@
 
 namespace DH\DoctrineAuditBundle\Tests\Reader;
 
-use DH\DoctrineAuditBundle\Configuration\AuditConfigurationInterface;
+use DH\DoctrineAuditBundle\AuditConfiguration;
 use DH\DoctrineAuditBundle\Reader\AuditEntry;
 use DH\DoctrineAuditBundle\Reader\AuditReader;
 use DH\DoctrineAuditBundle\Tests\CoreTest;
@@ -13,7 +13,7 @@ use DH\DoctrineAuditBundle\Tests\Fixtures\Core\Tag;
 use Pagerfanta\Pagerfanta;
 
 /**
- * @covers \DH\DoctrineAuditBundle\Configuration\AuditConfigurationInterface
+ * @covers \DH\DoctrineAuditBundle\AuditConfiguration
  * @covers \DH\DoctrineAuditBundle\Manager\AuditManager
  * @covers \DH\DoctrineAuditBundle\DBAL\AuditLogger
  * @covers \DH\DoctrineAuditBundle\EventSubscriber\AuditSubscriber
@@ -32,7 +32,7 @@ class AuditReaderTest extends CoreTest
     {
         $reader = $this->getReader();
 
-        $this->assertInstanceOf(AuditConfigurationInterface::class, $reader->getConfiguration(), 'configuration instanceof AuditConfiguration::class');
+        $this->assertInstanceOf(AuditConfiguration::class, $reader->getConfiguration(), 'configuration instanceof AuditConfiguration::class');
     }
 
     public function testFilterIsNullByDefault(): void

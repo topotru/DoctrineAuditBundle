@@ -8,13 +8,13 @@
 
 namespace DH\DoctrineAuditBundle\Manager;
 
-use DH\DoctrineAuditBundle\Configuration\AuditConfigurationInterface;
+use DH\DoctrineAuditBundle\AuditConfiguration;
 use DH\DoctrineAuditBundle\Helper\AuditHelperInterface;
 use Doctrine\ORM\EntityManager;
 
 interface AuditManagerInterface
 {
-    public function getConfiguration(): AuditConfigurationInterface;
+    public function getConfiguration(): AuditConfiguration;
 
     public function insert(EntityManager $em, $entity, array $ch): void;
 

@@ -2,15 +2,14 @@
 
 namespace DH\DoctrineAuditBundle\Manager;
 
-
-use DH\DoctrineAuditBundle\Configuration\AuditConfigurationInterface;
+use DH\DoctrineAuditBundle\AuditConfiguration;
 use DH\DoctrineAuditBundle\Helper\AuditHelperInterface;
 use Doctrine\ORM\EntityManager;
 
 class AuditManager implements AuditManagerInterface
 {
     /**
-     * @var AuditConfigurationInterface
+     * @var \DH\DoctrineAuditBundle\AuditConfiguration
      */
     private $configuration;
 
@@ -25,16 +24,16 @@ class AuditManager implements AuditManagerInterface
      */
     private $helper;
 
-    public function __construct(AuditConfigurationInterface $configuration, AuditHelperInterface $helper)
+    public function __construct(AuditConfiguration $configuration, AuditHelperInterface $helper)
     {
         $this->configuration = $configuration;
         $this->helper = $helper;
     }
 
     /**
-     * @return AuditConfigurationInterface
+     * @return \DH\DoctrineAuditBundle\AuditConfiguration
      */
-    public function getConfiguration(): AuditConfigurationInterface
+    public function getConfiguration(): AuditConfiguration
     {
         return $this->configuration;
     }

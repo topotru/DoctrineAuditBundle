@@ -2,8 +2,7 @@
 
 namespace DH\DoctrineAuditBundle\Tests;
 
-use DH\DoctrineAuditBundle\Configuration\AuditConfiguration;
-use DH\DoctrineAuditBundle\Configuration\AuditConfigurationInterface;
+use DH\DoctrineAuditBundle\AuditConfiguration;
 use DH\DoctrineAuditBundle\Manager\AuditManager;
 use DH\DoctrineAuditBundle\EventSubscriber\AuditSubscriber;
 use DH\DoctrineAuditBundle\EventSubscriber\CreateSchemaListener;
@@ -108,17 +107,17 @@ abstract class BaseTest extends TestCase
         $this->getSchemaTool()->dropSchema($classes);
     }
 
-    protected function getAuditConfiguration(): AuditConfigurationInterface
+    protected function getAuditConfiguration(): AuditConfiguration
     {
         return $this->auditConfiguration;
     }
 
-    protected function setAuditConfiguration(AuditConfigurationInterface $configuration): void
+    protected function setAuditConfiguration(AuditConfiguration $configuration): void
     {
         $this->auditConfiguration = $configuration;
     }
 
-    protected function createAuditConfiguration(array $options = []): AuditConfigurationInterface
+    protected function createAuditConfiguration(array $options = []): AuditConfiguration
     {
         $container = new ContainerBuilder();
 
