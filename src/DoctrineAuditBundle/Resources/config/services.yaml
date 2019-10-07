@@ -22,18 +22,14 @@ services:
     alias: dh_doctrine_audit.reader
     public: true
 
-  dh_doctrine_audit.context_service:
-    class: DH\DoctrineAuditBundle\Manager\Context\AuditContextServiceDefault
-    public: true
-
-  DH\DoctrineAuditBundle\Manager\Context\AuditContextServiceDefault:
-    alias: dh_doctrine_audit.context_service
-    public: true
-
   dh_doctrine_audit.manager:
     class: DH\DoctrineAuditBundle\Manager\AuditManager
-    arguments: ["@dh_doctrine_audit.configuration", "@dh_doctrine_audit.helper", "@dh_doctrine_audit.context_service"]
+    arguments:
+      $configuration: "@dh_doctrine_audit.configuration"
+      $helper: "@dh_doctrine_audit.helper"
     public: true
+    autowire: true
+    autoconfigure: true
 
   DH\DoctrineAuditBundle\Manager\AuditManager:
     alias: dh_doctrine_audit.manager
