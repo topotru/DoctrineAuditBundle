@@ -12,10 +12,9 @@ class AuditStateServiceDefault implements AuditStateServiceInterface
 {
     /**
      * @param object $entity
-     * @param array $changeSet
      * @return string|null
      */
-    public function getCurrentState($entity, array $changeSet): ?string
+    public function getCurrentState($entity): ?string
     {
         return null;
     }

@@ -72,7 +72,7 @@ class AuditManager implements AuditManagerInterface
             'table' => $meta->getTableName(),
             'schema' => $meta->getSchemaName(),
             'id' => $this->helper->id($em, $entity),
-            'state' => $this->stateService->getCurrentState($entity, $ch)
+            'state' => $this->stateService->getCurrentState($entity)
         ]);
     }
 
@@ -101,7 +101,7 @@ class AuditManager implements AuditManagerInterface
             'table' => $meta->getTableName(),
             'schema' => $meta->getSchemaName(),
             'id' => $this->helper->id($em, $entity),
-            'state' => $this->stateService->getCurrentState($entity, $ch)
+            'state' => $this->stateService->getCurrentState($entity)
         ]);
     }
 
@@ -125,7 +125,7 @@ class AuditManager implements AuditManagerInterface
             'table' => $meta->getTableName(),
             'schema' => $meta->getSchemaName(),
             'id' => $id,
-            'state' => $this->stateService->getCurrentState($entity, [])
+            'state' => $this->stateService->getCurrentState($entity)
         ]);
     }
 
@@ -203,7 +203,7 @@ class AuditManager implements AuditManagerInterface
             'table' => $meta->getTableName(),
             'schema' => $meta->getSchemaName(),
             'id' => $this->helper->id($em, $source),
-            'state' => $this->stateService->getCurrentState($source, [])
+            'state' => $this->stateService->getCurrentState($source)
         ];
 
         if (isset($mapping['joinTable']['name'])) {
