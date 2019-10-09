@@ -5,6 +5,7 @@ namespace DH\DoctrineAuditBundle\Manager;
 use DH\DoctrineAuditBundle\AuditConfiguration;
 use DH\DoctrineAuditBundle\Helper\AuditHelperInterface;
 use DH\DoctrineAuditBundle\Manager\Context\AuditContextServiceInterface;
+use DH\DoctrineAuditBundle\Manager\State\AuditStateServiceInterface;
 use Doctrine\ORM\EntityManager;
 
 class AuditManager implements AuditManagerInterface
@@ -30,11 +31,17 @@ class AuditManager implements AuditManagerInterface
      */
     private $contextService;
 
-    public function __construct(AuditConfiguration $configuration, AuditHelperInterface $helper, AuditContextServiceInterface $contextService)
+    /**
+     * @var AuditStateServiceInterface
+     */
+    private $stateService;
+
+    public function __construct(AuditConfiguration $configuration, AuditHelperInterface $helper, AuditContextServiceInterface $contextService, AuditStateServiceInterface $stateService)
     {
         $this->configuration = $configuration;
         $this->helper = $helper;
         $this->contextService = $contextService;
+        $this->stateService = $stateService;
     }
 
     /**
@@ -65,6 +72,7 @@ class AuditManager implements AuditManagerInterface
             'table' => $meta->getTableName(),
             'schema' => $meta->getSchemaName(),
             'id' => $this->helper->id($em, $entity),
+            'state' => $this->stateService->getCurrentState($entity, $ch)
         ]);
     }
 
@@ -93,6 +101,7 @@ class AuditManager implements AuditManagerInterface
             'table' => $meta->getTableName(),
             'schema' => $meta->getSchemaName(),
             'id' => $this->helper->id($em, $entity),
+            'state' => $this->stateService->getCurrentState($entity, $ch)
         ]);
     }
 
@@ -116,6 +125,7 @@ class AuditManager implements AuditManagerInterface
             'table' => $meta->getTableName(),
             'schema' => $meta->getSchemaName(),
             'id' => $id,
+            'state' => $this->stateService->getCurrentState($entity, [])
         ]);
     }
 
@@ -193,6 +203,7 @@ class AuditManager implements AuditManagerInterface
             'table' => $meta->getTableName(),
             'schema' => $meta->getSchemaName(),
             'id' => $this->helper->id($em, $source),
+            'state' => $this->stateService->getCurrentState($source, [])
         ];
 
         if (isset($mapping['joinTable']['name'])) {
@@ -225,6 +236,7 @@ class AuditManager implements AuditManagerInterface
             'ip' => ':ip',
             'created_at' => ':created_at',
             'context' => ':context',
+            'state' => ':state'
         ];
 
         $query = sprintf(
@@ -247,6 +259,7 @@ class AuditManager implements AuditManagerInterface
         $statement->bindValue('ip', $data['blame']['client_ip']);
         $statement->bindValue('created_at', $dt->format('Y-m-d H:i:s'));
         $statement->bindValue('context', $this->contextService->getCurrentContext());
+        $statement->bindValue('state', $data['state']);
         $statement->execute();
     }
 

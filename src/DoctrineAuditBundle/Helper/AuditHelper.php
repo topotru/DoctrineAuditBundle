@@ -319,6 +319,14 @@ class AuditHelper implements AuditHelperInterface
                     'length' => 36,
                 ],
             ],
+            'state' => [
+                'type' => Type::STRING,
+                'options' => [
+                    'default' => null,
+                    'notnull' => false,
+                    'length' => 36,
+                ],
+            ],
         ];
 
         return $columns;
