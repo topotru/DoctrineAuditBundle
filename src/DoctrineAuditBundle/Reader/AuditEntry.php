@@ -59,6 +59,11 @@ class AuditEntry
      */
     protected $context;
 
+    /**
+     * @var string
+     */
+    protected $state;
+
     public function __set($name, $value)
     {
         $this->{$name} = $value;
@@ -168,5 +173,15 @@ class AuditEntry
     public function getContext(): string
     {
         return $this->context;
+    }
+
+    /**
+     * Get the value of state
+     *
+     * @return string
+     */
+    public function getState(): string
+    {
+        return $this->state;
     }
 }
