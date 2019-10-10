@@ -55,12 +55,12 @@ class AuditEntry
     protected $created_at;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $context;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $state;
 
@@ -166,21 +166,17 @@ class AuditEntry
     }
 
     /**
-     * Get the value of context
-     *
-     * @return string
+     * @return string|null
      */
-    public function getContext(): string
+    public function getContext(): ?string
     {
         return $this->context;
     }
 
     /**
-     * Get the value of state
-     *
-     * @return string
+     * @return string|null
      */
-    public function getState(): string
+    public function getState(): ?string
     {
         return $this->state;
     }
