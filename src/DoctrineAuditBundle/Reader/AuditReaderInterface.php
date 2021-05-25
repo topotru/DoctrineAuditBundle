@@ -21,4 +21,8 @@ interface AuditReaderInterface
 
     public function getEntityTableName($entity): string;
 
+    public function getContextAudits(string $context): array;
+
+    public function getContextAudit($entity, string $context): array;
+
 }
