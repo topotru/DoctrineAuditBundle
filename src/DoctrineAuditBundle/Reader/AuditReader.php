@@ -298,4 +298,40 @@ class AuditReader implements AuditReaderInterface
 
         return sprintf('%s%s%s%s', $schema, $this->configuration->getTablePrefix(), $this->getEntityTableName($entityName), $this->configuration->getTableSuffix());
     }
+
+    /**
+     * Returns an array of entity audits by context id.
+     *
+     * @param string $context
+     * @return array
+     */
+    public function getContextAudits(string $context): array
+    {
+        $res = [];
+        foreach (array_keys($this->getEntities()) as $i => $entityClass) {
+            $res[$entityClass] = $this->getContextAudit($entityClass, $context);
+        }
+        return array_filter($res);
+    }
+
+    /**
+     * Returns an array of entity audits by context id.
+     *
+     * @param $entity
+     * @param string $context
+     * @return array
+     */
+    public function getContextAudit($entity, string $context): array
+    {
+        $queryBuilder = $this->getAuditsQueryBuilder($entity);
+        $queryBuilder
+            ->andWhere("context = :context")
+            ->setParameter('context', $context);
+
+        /** @var Statement $statement */
+        $statement = $queryBuilder->execute();
+        $statement->setFetchMode(\PDO::FETCH_CLASS, AuditEntry::class);
+
+        return $statement->fetchAll();
+    }
 }
